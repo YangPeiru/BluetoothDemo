@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="400dp"
+              android:background="@color/colorPrueWhite"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="13dp">
+
+        <ImageView
+            android:id="@+id/sri_society_item_head"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@mipmap/ig_profile_photo_default"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="13dp"
+            android:layout_marginTop="7dp"
+            android:layout_toRightOf="@id/sri_society_item_head"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_society_item_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="名字"
+                android:textColor="#111111"
+                android:textSize="@dimen/common_text_size"/>
+
+            <TextView
+                android:id="@+id/tv_society_item_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="发表时间"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="12dp"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_society_item_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="13dp"
+        android:text="哈哈哈哈哈哈哈哈哈"
+        android:textColor="@color/colorTextBlack"
+        android:textSize="@dimen/common_text_size"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_society_item_piclayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp">
+
+        <com.example.yang.myapplication.utils.PicAdaptorLayout
+            android:layout_width="match_parent"
+            android:layout_height="260dp"
+            app:rlRatio="1.8"
+            app:rlRelative="width">
+
+            <ImageView
+                android:id="@+id/iv_society_item_pic"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/logo"/>
+        </com.example.yang.myapplication.utils.PicAdaptorLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/society_page_bg"/>
+
+            <TextView
+                android:id="@+id/tv_society_item_picnum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="3"
+                android:textColor="@color/colorPrueWhite"
+                android:textSize="@dimen/kind_of_text_size"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="13dp"
+        android:layout_marginTop="11dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="12dp">
+
+            <ImageView
+                android:id="@+id/iv_society_item_browsepic"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@mipmap/society_browse"/>
+
+            <TextView
+                android:id="@+id/tv_society_item_browsenum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@id/iv_society_item_browsepic"
+                android:text="浏览100次"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="12dp"/>
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iv_society_item_more"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:src="@mipmap/society_more_nolmal"/>
+
+        <ImageView
+            android:id="@+id/iv_society_item_share"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="28dp"
+            android:layout_toLeftOf="@id/iv_society_item_more"
+            android:src="@mipmap/society_share"/>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_society_item_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:layout_toLeftOf="@id/iv_society_item_share">
+
+            <ImageView
+                android:id="@+id/iv_society_item_commentpic"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginRight="3dp"
+                android:src="@mipmap/society_comment"/>
+
+            <TextView
+                android:id="@+id/tv_society_item_commentnum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/iv_society_item_commentpic"
+                android:text="12"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="@dimen/small_text_size"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_society_item_praise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:layout_toLeftOf="@id/rl_society_item_comment">
+
+            <ImageView
+                android:id="@+id/iv_society_item_praisepic"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginRight="3dp"
+                android:src="@mipmap/society_great_normal"/>
+
+            <TextView
+                android:id="@+id/tv_society_item_praisenum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/iv_society_item_praisepic"
+                android:paddingRight="2dp"
+                android:text="12"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="@dimen/small_text_size"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

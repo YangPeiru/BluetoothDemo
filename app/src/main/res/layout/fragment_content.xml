@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.example.yang.myapplication.view.NoScrollViewPager
+        android:id="@+id/content_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <RadioGroup
+        android:id="@+id/content_rg_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:background="@mipmap/bottom_tab_bg"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/content_rb_state"
+            style="@style/TabStyle"
+            android:drawableTop="@drawable/tab_smart_selector"
+            android:text="状态" />
+
+        <RadioButton
+            android:id="@+id/content_rb_plaza"
+            style="@style/TabStyle"
+            android:drawableTop="@drawable/tab_gov_selector"
+            android:text="广场" />
+
+        <RadioButton
+            android:id="@+id/content_rb_find"
+            style="@style/TabStyle"
+            android:drawableTop="@drawable/tab_news_selector"
+            android:text="发现" />
+
+        <RadioButton
+            android:id="@+id/content_rb_setting"
+            style="@style/TabStyle"
+            android:drawableTop="@drawable/tab_setting_selector"
+            android:text="设置" />
+    </RadioGroup>
+
+</LinearLayout>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorBlueColor">#00AAFE</color>
+    <color name="colorPublicBackground">#ff4DB4FA</color>
+    <color name="colorPublicHeader">#00AAFF</color>
+    <color name="colorWhiteText">#F5F5F5</color>
+    <color name="colorWhiteHeaderBg">#F7F7F7</color>
+    <color name="colorPrueWhite">#FFFFFF</color>
+    <color name="coLorGrayText">#A6A6A6</color>
+    <color name="colorDarkGray">#666666</color>
+    <color name="colorTextBlack">#333333</color>
+    <color name="colorAlphaBg">#20000000</color>
+    <color name="colorAlphaShadow">#80000000</color>
+    <color name="colorDarkAlphaBg">#32000000</color>
+    <color name="colorRedText">#D80730</color>
+    <color name="colorWarnOrange">#ffF16935</color>
+    <color name="colorOrange">#ff4e00</color>
+    <color name="colorWhiteBg">#F1F3F5</color>
+    <color name="colorWhiteFragmentBg">#EAEAEA</color>
+    <color name="colorWhiteActivityBg">#E5E5E5</color>
+    <color name="colorLineBg">#DFDFDF</color>
+    <color name="colorRateNormal">#64d5e1</color>
+    <color name="colorRatePressed">#4ac1cd</color>
+    <color name="colorActivityGrayBg">#DDDDDD</color>
+    <color name="colorTabText_normal">#99ffffff</color>
+    <color name="colorTab_indicator">#00cfe7</color>
+    <color name="colorText_normal">#cccccc</color>
+    <color name="colorLine_normal">#aaaaaa</color>
+    <color name="viewLine_divider">#e0e0e0</color>
+</resources>

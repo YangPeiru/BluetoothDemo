@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="166dp"
+    android:layout_height="96dp"
+    android:orientation="vertical"
+    android:layout_marginRight="10dp"
+    android:background="@mipmap/society_takephoto_window_bg"
+    >
+    <LinearLayout
+        android:id="@+id/ll_pop_clue"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+        <TextView
+            android:textColor="@color/colorTextBlack"
+            android:layout_marginTop="8dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/tv_pop_takephoto"
+            android:text="保存图片"
+            android:textSize="14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <FrameLayout
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+        <include layout="@layout/popup_line_more" />
+    </FrameLayout>
+    <LinearLayout
+        android:id="@+id/ll_pop_more_report"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_horizontal">
+        <TextView
+            android:layout_marginTop="15dp"
+            android:textColor="#ff1212"
+            android:text="举报照片"
+            android:textSize="14sp"
+            android:id="@+id/tv_pop_more_report"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>

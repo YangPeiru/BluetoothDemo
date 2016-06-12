@@ -25,7 +25,7 @@ import java.util.List;
  * 描述:
  * TODO:
  */
-public class ContentFragment extends Fragment {
+public class ContentFragment extends BaseFragment {
 
     private NoScrollViewPager mViewPager;
     private RadioGroup mRgTabs;

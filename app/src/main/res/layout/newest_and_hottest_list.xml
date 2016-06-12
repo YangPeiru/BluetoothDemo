@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.example.yang.myapplication.utils.SwipeRefreshLayout
+    <com.example.yang.myapplication.view.SwipeRefreshLayout
         android:id="@+id/srl_society"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -14,6 +14,6 @@
             android:layout_height="match_parent"
             android:listSelector="#00000000"/>
 
-    </com.example.yang.myapplication.utils.SwipeRefreshLayout>
+    </com.example.yang.myapplication.view.SwipeRefreshLayout>
 
 </RelativeLayout>

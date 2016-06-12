@@ -22,7 +22,7 @@ import com.example.yang.myapplication.bean.ListBean;
 import com.example.yang.myapplication.bean.PConst;
 import com.example.yang.myapplication.utils.PUtils;
 import com.example.yang.myapplication.utils.SwipeListViewOnScrollListener;
-import com.example.yang.myapplication.utils.SwipeRefreshLayout;
+import com.example.yang.myapplication.view.SwipeRefreshLayout;
 import com.lidroid.xutils.ViewUtils;
 import com.squareup.picasso.Picasso;
 

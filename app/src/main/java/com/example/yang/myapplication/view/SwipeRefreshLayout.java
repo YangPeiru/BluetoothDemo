@@ -1,4 +1,4 @@
-package com.example.yang.myapplication.utils;
+package com.example.yang.myapplication.view;
 
 /**
  * Created by ypr on 2016-06-11 14:18
@@ -21,8 +21,6 @@ package com.example.yang.myapplication.utils;
  * limitations under the License.
  */
 
-import android.support.annotation.ColorInt;
-import android.support.annotation.ColorRes;
 import android.util.Log;
 import android.view.animation.Animation;
         import android.content.Context;
@@ -37,8 +35,7 @@ import android.view.animation.Animation;
         import android.view.ViewConfiguration;
         import android.view.ViewGroup;
         import android.view.animation.AccelerateInterpolator;
-        import android.view.animation.Animation;
-        import android.view.animation.Animation.AnimationListener;
+import android.view.animation.Animation.AnimationListener;
         import android.view.animation.DecelerateInterpolator;
         import android.view.animation.Transformation;
         import android.widget.AbsListView;

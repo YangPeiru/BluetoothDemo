@@ -1,4 +1,4 @@
-package com.example.yang.myapplication.utils;
+package com.example.yang.myapplication.view;
 
 /**
  * Created by ypr on 2016-06-11 14:22
@@ -22,8 +22,7 @@ package com.example.yang.myapplication.utils;
  */
 
 import android.graphics.Canvas;
-        import android.graphics.Canvas;
-        import android.graphics.Paint;
+import android.graphics.Paint;
         import android.graphics.Rect;
         import android.graphics.RectF;
         import android.support.v4.view.ViewCompat;

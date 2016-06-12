@@ -1,4 +1,4 @@
-package com.example.yang.myapplication.utils;
+package com.example.yang.myapplication.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;

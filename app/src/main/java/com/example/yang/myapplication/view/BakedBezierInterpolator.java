@@ -1,4 +1,4 @@
-package com.example.yang.myapplication.utils;
+package com.example.yang.myapplication.view;
 
 /**
  * Created by ypr on 2016-06-11 14:23

@@ -1,9 +1,10 @@
 package com.example.yang.myapplication.utils;
 
 //import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
+
+import com.example.yang.myapplication.view.SwipeRefreshLayout;
 
 /**
  * 下拉刷新ListView设置滑动监听,避免冲突bug

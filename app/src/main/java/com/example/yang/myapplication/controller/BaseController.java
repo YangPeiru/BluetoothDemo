@@ -27,4 +27,6 @@ public abstract class BaseController {
         // controller自己去实现自己加载数据的方式
     }
     protected abstract View initView(Context context);
+
+    protected void onDestroy(){}
 }

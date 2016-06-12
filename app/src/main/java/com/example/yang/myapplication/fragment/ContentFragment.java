@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.yang.myapplication.R;
 import com.example.yang.myapplication.controller.BaseController;
+import com.example.yang.myapplication.controller.MyStateContrller;
 import com.example.yang.myapplication.controller.NewestListController;
 import com.example.yang.myapplication.view.NoScrollViewPager;
 
@@ -59,7 +60,7 @@ public class ContentFragment extends BaseFragment {
     private void initData() {
         // 模拟数据显示 TODO:
         mPageDatas = new ArrayList<>();
-        mPageDatas.add(new NewestListController(getActivity()));
+        mPageDatas.add(new MyStateContrller(getActivity()));
         mPageDatas.add(new NewestListController(getActivity()));
         mPageDatas.add(new NewestListController(getActivity()));
         mPageDatas.add(new NewestListController(getActivity()));

@@ -18,6 +18,9 @@
         </activity>
         <activity android:name=".activity.MainUI"/>
         <activity android:name=".activity.GuideUI"/>
+        <activity android:name=".activity.SignInUI"/>
+        <activity android:name=".activity.LogInUI"/>
+        <activity android:name=".activity.BaseActivity"/>
     </application>
 
 </manifest>

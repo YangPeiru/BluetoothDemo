@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +34,7 @@ import java.util.List;
  * 描述:
  * TODO:
  */
-public class GuideUI extends AppCompatActivity implements View.OnClickListener {
+public class GuideUI extends BaseActivity implements View.OnClickListener {
 
     private ViewPager mViewPager;
     private LinearLayout mPointContainer;
@@ -53,7 +52,6 @@ public class GuideUI extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_guide);
 
         initView();

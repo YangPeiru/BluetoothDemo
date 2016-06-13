@@ -78,19 +78,14 @@ public class ContentFragment extends BaseFragment {
             {
                 case R.id.content_rb_state:
                     mCurrentTab = 0;
-                    close = true;
                     break;
                 case R.id.content_rb_plaza:
                     mCurrentTab = 1;
                     break;
                 case R.id.content_rb_find:
-                    myStateContrller.unregister(close);
-                    close = false;
                     mCurrentTab = 2;
                     break;
                 case R.id.content_rb_setting:
-                    myStateContrller.unregister(close);
-                    close = false;
                     mCurrentTab = 3;
                     break;
                 default:

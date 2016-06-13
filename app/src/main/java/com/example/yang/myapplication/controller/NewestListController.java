@@ -25,7 +25,6 @@ import com.example.yang.myapplication.utils.PUtils;
 import com.example.yang.myapplication.utils.SwipeListViewOnScrollListener;
 import com.example.yang.myapplication.view.SwipeRefreshLayout;
 
-//import com.lidroid.xutils.ViewUtils;
 import com.squareup.picasso.Picasso;
 
 import org.xutils.x;
@@ -61,15 +60,13 @@ public class NewestListController extends BaseController {
         View view = View.inflate(context, R.layout.newest_and_hottest_list, null);
         // 注入
         x.view().inject(view);
-//        ViewUtils.inject(this, view);
         srl = (SwipeRefreshLayout) view.findViewById(R.id.srl_society);
         lv_hottest = (ListView) view.findViewById(R.id.lv_society_list);
-        srl.setColorScheme(R.color.colorPrimaryDark,
-                R.color.colorPrimary,
-                R.color.colorBlueColor,R.color.coLorGrayText);
+        srl.setColorScheme(R.color.colorWhiteFragmentBg,
+                R.color.colorOrange,
+                R.color.colorBlueColor,R.color.colorRedText);
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View popupView = inflater.inflate(R.layout.popup_window_more, null);
-//        ViewUtils.inject(this, popupView);
         x.view().inject(view);
         mPopupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT, true);

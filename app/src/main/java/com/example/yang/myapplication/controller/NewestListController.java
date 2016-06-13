@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 
 
+import android.support.v7.widget.ViewUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +24,11 @@ import com.example.yang.myapplication.bean.PConst;
 import com.example.yang.myapplication.utils.PUtils;
 import com.example.yang.myapplication.utils.SwipeListViewOnScrollListener;
 import com.example.yang.myapplication.view.SwipeRefreshLayout;
-import com.lidroid.xutils.ViewUtils;
+
+//import com.lidroid.xutils.ViewUtils;
 import com.squareup.picasso.Picasso;
+
+import org.xutils.x;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,7 +60,8 @@ public class NewestListController extends BaseController {
     protected View initView(Context context) {
         View view = View.inflate(context, R.layout.newest_and_hottest_list, null);
         // 注入
-        ViewUtils.inject(this, view);
+        x.view().inject(view);
+//        ViewUtils.inject(this, view);
         srl = (SwipeRefreshLayout) view.findViewById(R.id.srl_society);
         lv_hottest = (ListView) view.findViewById(R.id.lv_society_list);
         srl.setColorScheme(R.color.colorPrimaryDark,
@@ -64,6 +69,8 @@ public class NewestListController extends BaseController {
                 R.color.colorBlueColor,R.color.coLorGrayText);
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View popupView = inflater.inflate(R.layout.popup_window_more, null);
+//        ViewUtils.inject(this, popupView);
+        x.view().inject(view);
         mPopupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT, true);
         // 这里设置显示PopuWindow之后在外面点击是否有效。如果为false的话，那么点击PopuWindow外面并不会关闭PopuWindow。

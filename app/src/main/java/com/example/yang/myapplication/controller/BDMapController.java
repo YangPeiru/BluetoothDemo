@@ -22,7 +22,6 @@ public class BDMapController extends BaseController{
 
     @Override
     protected View initView(Context context) {
-        SDKInitializer.initialize(context);
         View view =View.inflate(context, R.layout.controller_find_map,null);
         x.view().inject(view);
         //获取地图控件引用

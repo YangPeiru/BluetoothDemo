@@ -36,7 +36,6 @@ import java.util.regex.Pattern;
 
 /**
  * Created by ypr on 2015/12/30.
- *
  */
 public class PUtils {
 
@@ -70,6 +69,24 @@ public class PUtils {
         }
         // return sb.toString().toUpperCase().trim();
         return sb.toString().trim();
+    }
+
+    /**
+     * 将16进制的字符串转换为字节数组
+     *
+     * @param message
+     * @return 字节数组
+     */
+    public static byte[] getHexBytes(String message) {
+        int len = message.length() / 2;
+        char[] chars = message.toCharArray();
+        String[] hexStr = new String[len];
+        byte[] bytes = new byte[len];
+        for (int i = 0, j = 0; j < len; i += 2, j++) {
+            hexStr[j] = "" + chars[i] + chars[i + 1];
+            bytes[j] = (byte) Integer.parseInt(hexStr[j], 16);
+        }
+        return bytes;
     }
 
     /**

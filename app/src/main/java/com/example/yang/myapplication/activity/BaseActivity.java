@@ -18,8 +18,6 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        SDKInitializer.initialize(getApplicationContext());
     }
     private long clickTime = -1L;
     @Override

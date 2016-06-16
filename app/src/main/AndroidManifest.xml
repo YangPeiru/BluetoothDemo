@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.yang.myapplication">
+    <!--百度地图权限-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
@@ -12,10 +13,18 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.BROADCAST_STICKY" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!--蓝牙权限-->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <!--只给具有蓝牙4.0的设备使用-->
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -25,6 +34,7 @@
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="BpvhlGKniRr2ftluFFn2QgRtcbnOhbjo" />
+
         <activity android:name=".activity.SplashUI">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,11 +42,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainUI"/>
-        <activity android:name=".activity.GuideUI"/>
-        <activity android:name=".activity.SignInUI"/>
-        <activity android:name=".activity.LogInUI"/>
-        <activity android:name=".activity.BaseActivity"/>
+        <activity android:name=".activity.MainUI" />
+        <activity android:name=".activity.GuideUI" />
+        <activity android:name=".activity.SignInUI" />
+        <activity android:name=".activity.LogInUI" />
+        <activity android:name=".activity.BaseActivity" />
     </application>
 
 </manifest>

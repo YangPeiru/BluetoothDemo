@@ -3,6 +3,7 @@ package com.example.yang.myapplication.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.KeyEvent;
+import android.view.Window;
 import android.widget.Toast;
 
 import com.example.yang.myapplication.R;
@@ -17,6 +18,7 @@ public class LogInUI extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
     }
     private long clickTime = -1L;

@@ -111,6 +111,9 @@ public class ContentFragment extends BaseFragment {
 
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
+            //两个contrller是同一个,因为是同一个position
+            BaseController controller = mPageDatas.get(position);
+            controller.onDestroy();//调用子类自己的销毁方式
             container.removeView((View) object);
         }
     }

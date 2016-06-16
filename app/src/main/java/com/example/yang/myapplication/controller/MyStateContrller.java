@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -40,6 +41,7 @@ public class MyStateContrller extends BaseController{
 
     private void register() {
         mContext.registerReceiver(batteryChangedReceiver,  new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        Log.d("Log","注册电量广播");
     }
 
     public void unregister(boolean close) {
@@ -65,5 +67,6 @@ public class MyStateContrller extends BaseController{
     public void onDestroy() {
         super.onDestroy();
         unregister(true);
+        Log.d("Log","销毁电量显示广播");
     }
 }

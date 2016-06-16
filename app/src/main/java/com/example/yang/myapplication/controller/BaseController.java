@@ -28,5 +28,5 @@ public abstract class BaseController {
     }
     protected abstract View initView(Context context);
 
-    protected void onDestroy(){}
+    public void onDestroy(){}
 }

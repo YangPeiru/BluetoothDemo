@@ -1,21 +1,16 @@
 package com.example.yang.myapplication.fragment;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
-import android.widget.TextView;
-
-import com.example.yang.myapplication.BaseApplication;
 import com.example.yang.myapplication.R;
+import com.example.yang.myapplication.controller.BDMapController;
 import com.example.yang.myapplication.controller.BaseController;
+import com.example.yang.myapplication.controller.MyStateContrller;
 import com.example.yang.myapplication.controller.MyStateContrller;
 import com.example.yang.myapplication.controller.NewestListController;
 import com.example.yang.myapplication.view.NoScrollViewPager;
@@ -32,11 +27,10 @@ public class ContentFragment extends BaseFragment {
 
     private NoScrollViewPager mViewPager;
     private RadioGroup mRgTabs;
-    private List<BaseController> mPageDatas;				//
-    private int					mCurrentTab;				// 记录当前选中的tab
+    private List<BaseController> mPageDatas;                //
+    private int mCurrentTab;                // 记录当前选中的tab
     private MyStateContrller myStateContrller;
-    private boolean close=true;
-    private BaseApplication application;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -56,7 +50,6 @@ public class ContentFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        application = new BaseApplication();
         initData();
     }
 
@@ -66,7 +59,7 @@ public class ContentFragment extends BaseFragment {
         myStateContrller = new MyStateContrller(getActivity());
         mPageDatas.add(myStateContrller);
         mPageDatas.add(new NewestListController(getActivity()));
-        mPageDatas.add(new NewestListController(getActivity()));
+        mPageDatas.add(new BDMapController(getActivity()));
         mPageDatas.add(new NewestListController(getActivity()));
         mViewPager.setAdapter(new ContentPagerAdapter());
     }
@@ -74,8 +67,7 @@ public class ContentFragment extends BaseFragment {
     private class TabChangedListener implements RadioGroup.OnCheckedChangeListener {
         @Override
         public void onCheckedChanged(RadioGroup group, int checkedId) {
-            switch (checkedId)
-            {
+            switch (checkedId) {
                 case R.id.content_rb_state:
                     mCurrentTab = 0;
                     break;

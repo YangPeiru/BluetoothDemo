@@ -11,8 +11,33 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
+    //签名配置
+    signingConfigs {
+        debugConfig {
+            keyAlias "BluetoothDemo"
+            keyPassword "920514"
+            storeFile file("D:/Key/BluetoothDemo.store")
+            storePassword "123456"
+        }
+//        releaseConfig {
+//            keyAlias "BluetoothDemo"
+//            keyPassword "920514"
+//            storeFile file("D:/Key/BluetoothDemo.store")
+//            storePassword "123456"
+//        }
+    }
+    sourceSets {
+        main() {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
     buildTypes {
+        debug {
+            signingConfig signingConfigs.debugConfig
+        }
         release {
+//            signingConfig signingConfigs.releaseConfig
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

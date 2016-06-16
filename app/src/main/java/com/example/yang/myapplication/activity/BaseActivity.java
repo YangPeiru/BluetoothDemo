@@ -7,6 +7,8 @@ import android.view.KeyEvent;
 import android.view.Window;
 import android.widget.Toast;
 
+import com.baidu.mapapi.SDKInitializer;
+
 /**
  * Created by ypr on 2016-06-13 17:01
  * 描述:
@@ -15,8 +17,9 @@ import android.widget.Toast;
 public class BaseActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState, persistentState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        SDKInitializer.initialize(getApplicationContext());
     }
     private long clickTime = -1L;
     @Override

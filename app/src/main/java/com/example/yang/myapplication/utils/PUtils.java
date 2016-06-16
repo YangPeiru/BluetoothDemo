@@ -35,8 +35,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by llh on 2015/12/30.
- * from topVdn
+ * Created by ypr on 2015/12/30.
+ *
  */
 public class PUtils {
 
@@ -53,6 +53,23 @@ public class PUtils {
                 imm.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             }
         }
+    }
+
+    /**
+     * 二进制转换16进制的字符串形式
+     *
+     * @param b
+     * @return
+     */
+    public static String byte2HexStr(byte[] b) {
+        String stmp = "";
+        StringBuilder sb = new StringBuilder("");
+        for (int n = 0; n < b.length; n++) {
+            stmp = Integer.toHexString(b[n] & 0xFF);
+            sb.append((stmp.length() == 1) ? "0" + stmp : stmp);
+        }
+        // return sb.toString().toUpperCase().trim();
+        return sb.toString().trim();
     }
 
     /**
@@ -77,7 +94,7 @@ public class PUtils {
 
             int n1;
             for (boolean n = false; (n1 = is.read(e)) != -1; response = response + new String(e, 0, n1)) {
-                ;
+
             }
         } catch (IOException var4) {
             var4.printStackTrace();
@@ -126,7 +143,7 @@ public class PUtils {
      * @param date 标准时间格式
      * @return 切割后的时间
      */
-    public static String formatDate2HMS(String date){
+    public static String formatDate2HMS(String date) {
         return date.substring(11);
     }
 
@@ -172,16 +189,14 @@ public class PUtils {
         return JParams;
     }
 
-    public static int px2dp(Context context, int px)
-    {
+    public static int px2dp(Context context, int px) {
         // dp = px * 160 / dpi
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         int dpi = metrics.densityDpi;
         return (int) (px * 160f / dpi + 0.5f);
     }
 
-    public static int dp2px(Context context, int dp)
-    {
+    public static int dp2px(Context context, int dp) {
         // px = dp * (dpi / 160)
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         int dpi = metrics.densityDpi;
@@ -333,7 +348,7 @@ public class PUtils {
 
                 process.destroy();
             } catch (Exception var12) {
-                ;
+
             }
 
         }

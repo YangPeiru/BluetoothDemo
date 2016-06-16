@@ -54,7 +54,7 @@ public class SplashUI extends BaseActivity {
                     startActivity(new Intent(SplashUI.this,GuideUI.class));
                 }else{
                     //不是第一次直接进入登录界面
-                    startActivity(new Intent(SplashUI.this,SignInUI.class));
+                    startActivity(new Intent(SplashUI.this,MainUI.class));
                 }
                 finish();
             }

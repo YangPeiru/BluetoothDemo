@@ -21,12 +21,11 @@ public class MyStateContrller extends BaseController{
 
     public MyStateContrller(Context context) {
         super(context);
-        this.mContext = context;
     }
 
     @Override
     protected View initView(Context context) {
-        View view = View.inflate(context, R.layout.mystate,null);
+        View view = View.inflate(context, R.layout.controller_mystate,null);
         x.view().inject(view);
         mBatteryView = (BatteryView) view.findViewById(R.id.view_batterty);
         mBatteryNum = (TextView) view.findViewById(R.id.tv_battery);
@@ -63,7 +62,7 @@ public class MyStateContrller extends BaseController{
     };
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         unregister(true);
     }

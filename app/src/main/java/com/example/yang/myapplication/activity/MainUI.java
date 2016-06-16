@@ -4,6 +4,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Window;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.example.yang.myapplication.R;
 import com.example.yang.myapplication.fragment.ContentFragment;
 
@@ -17,6 +18,7 @@ public class MainUI extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SDKInitializer.initialize(getApplication());
         setContentView(R.layout.activity_main);
         //开启事务加载fragment
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

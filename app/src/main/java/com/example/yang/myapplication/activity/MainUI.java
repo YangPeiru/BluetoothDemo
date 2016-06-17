@@ -6,17 +6,22 @@ import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.support.v4.app.FragmentManager;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Window;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.example.yang.myapplication.R;
-import com.example.yang.myapplication.fragment.ContentFragment;
+import com.example.yang.myapplication.fragment.BDMapFragment;
+import com.example.yang.myapplication.fragment.MyStateFragment;
+import com.example.yang.myapplication.fragment.NewsListFragment;
+import com.example.yang.myapplication.fragment.SettingFragment;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 /**
@@ -29,22 +34,46 @@ public class MainUI extends BaseActivity {
 
     private BluetoothAdapter mBluetoothAdapter;
     private final int REQUEST_ENABLE_BT = 1;
+    private ArrayList<Fragment> fragments;
+    private RadioGroup mRgTabs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         SDKInitializer.initialize(getApplication());
         setContentView(R.layout.activity_main);
+        initView();
+        initData();
+
+    }
+
+    private void initView() {
+        mRgTabs = (RadioGroup) findViewById(R.id.content_rg_tabs);
+    }
+
+
+    private void initData() {
+        fragments = new ArrayList<>();
+        fragments.add(new MyStateFragment());
+        fragments.add(new NewsListFragment());
+        fragments.add(new BDMapFragment());
+        fragments.add(new SettingFragment());
+        //利用RadioGroup脚标索引切换Fragment,默认首页选中
+        ((RadioButton) mRgTabs.getChildAt(0)).setChecked(true);
+        mRgTabs.setOnCheckedChangeListener(new TabChangedListener());
         startBluetooth();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //开启事务加载fragment
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.main_content_container, new ContentFragment(), TAG_CONTENT);
-        transaction.commit();
+    private class TabChangedListener implements RadioGroup.OnCheckedChangeListener {
+        @Override
+        public void onCheckedChanged(RadioGroup group, int checkedId) {
+            int index = group.indexOfChild(group.findViewById(checkedId));
+            //开启事务加载fragment
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.main_content_container, fragments.get(index), TAG_CONTENT);
+            transaction.commit();
+        }
     }
 
     private void startBluetooth() {
@@ -56,13 +85,13 @@ public class MainUI extends BaseActivity {
             // Device does not support Bluetooth
             Toast.makeText(getApplicationContext(), "没有蓝牙设备", Toast.LENGTH_LONG).show();
             finish();
-        }else if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)){
+        } else if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
             Toast.makeText(this, "设备不支持蓝牙4.0", Toast.LENGTH_SHORT).show();
             finish();
-        } else if(!mBluetoothAdapter.isEnabled()){
+        } else if (!mBluetoothAdapter.isEnabled()) {
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-        }else{
+        } else {
             Toast.makeText(getApplicationContext(), "蓝牙已开启", Toast.LENGTH_LONG).show();
             scanBtDevices();
         }
@@ -70,13 +99,12 @@ public class MainUI extends BaseActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d("Log", "requestCode" + requestCode + "\n resultCode=" + resultCode);
         if (requestCode == REQUEST_ENABLE_BT) {
             if (resultCode == RESULT_OK) {
                 mBluetoothAdapter.enable();
                 Toast.makeText(getApplicationContext(), "开启蓝牙", Toast.LENGTH_LONG).show();
                 scanBtDevices();
-            }else if(resultCode==RESULT_CANCELED){
+            } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(getApplicationContext(), "拒绝开启蓝牙", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(getApplicationContext(), "蓝牙开启失败!", Toast.LENGTH_LONG).show();

@@ -26,11 +26,6 @@ public class PConst {
     }
 
     /**
-     * SharedPreference默认读取参数
-     */
-    public static final String SP_CONFIG = "pac_config";
-
-    /**
      * 手机号正则(加入短信验证码功能以后需要完善)
      */
     public static final String REG_EXP_PHONE = "^[1][3458][0-9]{9}$";
@@ -76,16 +71,6 @@ public class PConst {
     public static final long PROGRESS_BAR_TIMEOUT = 1500L;
 
     /**
-     * iermu热点默认密码
-     */
-    public static final String DEFAULT_IERMU_PASSWORD = "cmsiermu2013";
-
-    /**
-     * 默认配置信息
-     */
-    public static final String DEFAULT_CONFIGURATION = "AwEAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==";
-
-    /**
      * 默认保存账户Key
      */
     public static final String LOCAL_ACCOUNT = "LOCAL_ACCOUNT";
@@ -94,36 +79,4 @@ public class PConst {
      * 默认保存密码Key
      */
     public static final String LOCAL_PWD = "LOCAL_PWD";
-
-    /**
-     * 默认登录云平台的APP_ID
-     */
-    public static final String APP_ID = "Yynv";
-
-    /**
-     * 默认登录云平台的
-     */
-    public static final String CLOUD_DEFAULT_PWD = "654321";
-
-    /**
-     * 默认登录云平台所需配置串
-     */
-    public static final String CLOUD_SERVICE_CONFIG = "";
-
-    /**
-     * 报警消息查询普通用户userId
-     */
-    public static final int COMMON_USER_ID = 0;
-
-    /**
-     * 默认保存本地设备数量
-     */
-    public static final String DEVICE_AMOUNT = "DEVICE_AMOUNT";
-
-    public static final String INTENT_FILTER_FINISH_ADD = "finishAdd";//过滤广播
-
-    public static final String INTENT_FILTER_ADD_SUCCESS = "addSuccess";//过滤广播
-
-    public static final String INTENT_FILTER_FINISH_UNBIND = "finishUnbind";//过滤广播
-
 }

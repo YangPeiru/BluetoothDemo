@@ -1,7 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_content_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MainUI"/>
+    android:orientation="vertical"
+    tools:context=".activity.MainUI">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
+    <RadioGroup
+        android:id="@+id/content_rg_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:background="@mipmap/bottom_tab_bg"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/content_rb_state"
+            style="@style/TabStyle"
+            android:drawableTop="@drawable/tab_smart_selector"
+            android:text="状态" />
+
+        <RadioButton
+            android:id="@+id/content_rb_plaza"
+            style="@style/TabStyle"
+            android:drawableTop="@drawable/tab_gov_selector"
+            android:text="广场" />
+
+        <RadioButton
+            android:id="@+id/content_rb_find"
+            style="@style/TabStyle"
+            android:drawableTop="@drawable/tab_news_selector"
+            android:text="发现" />
+
+        <RadioButton
+            android:id="@+id/content_rb_setting"
+            style="@style/TabStyle"
+            android:drawableTop="@drawable/tab_setting_selector"
+            android:text="设置" />
+    </RadioGroup>
+</LinearLayout>

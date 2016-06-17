@@ -501,48 +501,4 @@ public class PUtils {
         }
 
     }
-
-    public static SpannableStringBuilder makeTextWithTag(String tag, int tagColor, String text) {
-        SpannableStringBuilder builder = new SpannableStringBuilder();
-        builder.append(tag);
-        int end = builder.length();
-        builder.append(" ");
-        if (text != null) {
-            builder.append(text);
-        }
-
-        builder.setSpan(new ForegroundColorSpan(tagColor), 0, end, 33);
-        return builder;
-    }
-
-    public static void ellipsizeString(final SpannableStringBuilder text, final TextView txtView, final int lines) {
-        ViewTreeObserver observer = txtView.getViewTreeObserver();
-        String ellipsize = "...";
-        final TextPaint paint = new TextPaint(1);
-        paint.setTextSize(txtView.getTextSize());
-        final float ellipsizeWidth = paint.measureText("...");
-        observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            public void onGlobalLayout() {
-                ViewTreeObserver obs = txtView.getViewTreeObserver();
-                obs.removeGlobalOnLayoutListener(this);
-                if (txtView.getLineCount() > lines) {
-                    int lineEndIndex = txtView.getLayout().getLineEnd(lines - 1);
-                    int i = 0;
-                    String tmp = "";
-
-                    for (float width = 0.0F; width < ellipsizeWidth; ++i) {
-                        tmp = "" + text.charAt(lineEndIndex - i);
-                        width += paint.measureText(tmp);
-                    }
-
-                    text.replace(lineEndIndex - i, lineEndIndex, "...");
-                    text.delete(lineEndIndex - i + "...".length(), text.length());
-                    txtView.setText(text);
-                }
-
-            }
-        });
-    }
-
-
 }

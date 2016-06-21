@@ -31,10 +31,9 @@ public class SettingFragment extends BaseFragment {
     private int mCurrentTab;                // 记录当前选中的tab
     private MyStateContrller myStateContrller;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return View.inflate(getActivity(), R.layout.fragment_setting, null);
+    public int getContentLayoutRes() {
+        return R.layout.fragment_setting;
     }
 
     @Override

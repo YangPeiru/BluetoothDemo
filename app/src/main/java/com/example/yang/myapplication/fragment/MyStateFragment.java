@@ -15,10 +15,9 @@ import com.example.yang.myapplication.R;
  */
 public class MyStateFragment extends BaseFragment {
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return View.inflate(getActivity(), R.layout.fragment_mystate, null);
+    public int getContentLayoutRes() {
+        return R.layout.fragment_mystate;
     }
 
     @Override

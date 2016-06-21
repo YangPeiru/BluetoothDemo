@@ -30,8 +30,8 @@ import java.util.Set;
  * TODO:
  */
 public class MainUI extends BaseActivity {
-    private static final String TAG_CONTENT = "tag_content";
 
+    private static final String TAG_MAP = "TAG_MAP";
     private BluetoothAdapter mBluetoothAdapter;
     private final int REQUEST_ENABLE_BT = 1;
     private ArrayList<Fragment> fragments;
@@ -41,7 +41,6 @@ public class MainUI extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        SDKInitializer.initialize(getApplication());
         setContentView(R.layout.activity_main);
         initView();
         initData();
@@ -54,6 +53,8 @@ public class MainUI extends BaseActivity {
 
 
     private void initData() {
+        mRgTabs.setOnCheckedChangeListener(new TabChangedListener());
+        startBluetooth();
         fragments = new ArrayList<>();
         fragments.add(new MyStateFragment());
         fragments.add(new NewsListFragment());
@@ -61,8 +62,6 @@ public class MainUI extends BaseActivity {
         fragments.add(new SettingFragment());
         //利用RadioGroup脚标索引切换Fragment,默认首页选中
         ((RadioButton) mRgTabs.getChildAt(0)).setChecked(true);
-        mRgTabs.setOnCheckedChangeListener(new TabChangedListener());
-        startBluetooth();
     }
 
     private class TabChangedListener implements RadioGroup.OnCheckedChangeListener {
@@ -71,7 +70,12 @@ public class MainUI extends BaseActivity {
             int index = group.indexOfChild(group.findViewById(checkedId));
             //开启事务加载fragment
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.main_content_container, fragments.get(index), TAG_CONTENT);
+            /**
+             * 下面两句代码能够重新加载地图
+             */
+//            fragments.remove(2);
+//            fragments.add(2,new BDMapFragment());
+            transaction.replace(R.id.main_content_container, fragments.get(index));
             transaction.commit();
         }
     }

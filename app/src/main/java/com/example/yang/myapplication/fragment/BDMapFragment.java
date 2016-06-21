@@ -10,6 +10,9 @@ import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MapView;
 import com.example.yang.myapplication.R;
+
+import org.xutils.x;
+
 /**
  * Created by ypr on 2016-06-17 10:08
  * 描述:
@@ -26,10 +29,10 @@ public class BDMapFragment extends BaseFragment {
         SDKInitializer.initialize(getActivity().getApplication());
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return View.inflate(getActivity(), R.layout.fragment_bdmap, null);
+    public int getContentLayoutRes() {
+        SDKInitializer.initialize(getActivity().getApplication());
+        return R.layout.fragment_bdmap;
     }
 
     @Override
@@ -63,7 +66,6 @@ public class BDMapFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mMapView.onDestroy();
         mMapView=null;
     }
 

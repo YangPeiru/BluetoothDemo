@@ -1,5 +1,6 @@
 package com.example.yang.myapplication.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,14 +8,13 @@ import android.view.KeyEvent;
 import android.view.Window;
 import android.widget.Toast;
 
-import com.baidu.mapapi.SDKInitializer;
 
 /**
  * Created by ypr on 2016-06-13 17:01
  * 描述:
  * TODO:
  */
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);

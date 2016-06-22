@@ -16,7 +16,6 @@ import com.example.yang.myapplication.R;
 import com.example.yang.myapplication.utils.Constants;
 import com.example.yang.myapplication.utils.PreferenceUtils;
 
-
 /**
  * Created by ypr on 2016-06-08 11:21
  * 描述:

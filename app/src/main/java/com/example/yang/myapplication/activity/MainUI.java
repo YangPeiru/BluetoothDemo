@@ -1,22 +1,25 @@
 package com.example.yang.myapplication.activity;
 
+import android.Manifest;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.Window;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.baidu.mapapi.SDKInitializer;
 import com.example.yang.myapplication.R;
-import com.example.yang.myapplication.fragment.BDMapFragment;
+import com.example.yang.myapplication.fragment.GDMapFragment;
 import com.example.yang.myapplication.fragment.MyStateFragment;
 import com.example.yang.myapplication.fragment.NewsListFragment;
 import com.example.yang.myapplication.fragment.SettingFragment;
@@ -36,15 +39,24 @@ public class MainUI extends BaseActivity {
     private final int REQUEST_ENABLE_BT = 1;
     private ArrayList<Fragment> fragments;
     private RadioGroup mRgTabs;
+    private int PERMISSIONS_SUCCESS = 110;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+        //SDK在Android 6.0下需要进行运行检测的权限如下：
+        //申请权限
+        ActivityCompat.requestPermissions(this, new String[]{
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.READ_PHONE_STATE},
+                PERMISSIONS_SUCCESS);//自定义的code
         initView();
         initData();
-
     }
 
     private void initView() {
@@ -52,16 +64,23 @@ public class MainUI extends BaseActivity {
     }
 
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        //可在此继续其他操作。
+    }
+
     private void initData() {
         mRgTabs.setOnCheckedChangeListener(new TabChangedListener());
-        startBluetooth();
         fragments = new ArrayList<>();
         fragments.add(new MyStateFragment());
         fragments.add(new NewsListFragment());
-        fragments.add(new BDMapFragment());
+        fragments.add(new GDMapFragment());
+//        fragments.add(GDMapFragment.newInstance());
         fragments.add(new SettingFragment());
         //利用RadioGroup脚标索引切换Fragment,默认首页选中
         ((RadioButton) mRgTabs.getChildAt(0)).setChecked(true);
+        startBluetooth();
     }
 
     private class TabChangedListener implements RadioGroup.OnCheckedChangeListener {
@@ -69,12 +88,12 @@ public class MainUI extends BaseActivity {
         public void onCheckedChanged(RadioGroup group, int checkedId) {
             int index = group.indexOfChild(group.findViewById(checkedId));
             //开启事务加载fragment
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
             /**
              * 下面两句代码能够重新加载地图
              */
 //            fragments.remove(2);
-//            fragments.add(2,new BDMapFragment());
+//            fragments.add(2,new GDMapFragment());
             transaction.replace(R.id.main_content_container, fragments.get(index));
             transaction.commit();
         }

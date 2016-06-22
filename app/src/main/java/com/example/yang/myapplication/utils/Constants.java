@@ -7,4 +7,5 @@ package com.example.yang.myapplication.utils;
  */
 public interface Constants {
     String	KEY_FIRST_USED	= "first_use";
+    String	MAP_FRAGMENT	= "map_fragment";
 }

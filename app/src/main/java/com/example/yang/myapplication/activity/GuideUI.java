@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -88,6 +89,7 @@ public class GuideUI extends BaseActivity implements View.OnClickListener {
 
         mViewPager.setAdapter(new GuideAdapter());
         mViewPager.addOnPageChangeListener(new GuidePageListener());
+//        mViewPager.setOnPageChangeListener(new GuidePageListener());
         // 监听layout布局改变完成的监听
         mPointSelected.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override

@@ -3,19 +3,14 @@ package com.example.yang.myapplication.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
 import com.example.yang.myapplication.R;
-import com.example.yang.myapplication.controller.BDMapController;
 import com.example.yang.myapplication.controller.BaseController;
 import com.example.yang.myapplication.controller.MyStateContrller;
-import com.example.yang.myapplication.controller.MyStateContrller;
-import com.example.yang.myapplication.controller.NewestListController;
 import com.example.yang.myapplication.view.NoScrollViewPager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

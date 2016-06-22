@@ -87,7 +87,7 @@ public class GDMapFragment extends BaseFragment implements LocationSource, AMapL
         //跟随：LOCATION_TYPE_MAP_FOLLOW
         //旋转：LOCATION_TYPE_MAP_ROTATE
         //定位：LOCATION_TYPE_LOCATE
-        aMap.setMyLocationType(AMap.LOCATION_TYPE_LOCATE);
+        aMap.setMyLocationType(AMap.LOCATION_TYPE_MAP_FOLLOW);
     }
 
     /**
@@ -113,6 +113,7 @@ public class GDMapFragment extends BaseFragment implements LocationSource, AMapL
     public void onResume() {
         super.onResume();
         mapView.onResume();
+        activate(mListener);
     }
 
     /**

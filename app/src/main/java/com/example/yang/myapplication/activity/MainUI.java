@@ -92,8 +92,8 @@ public class MainUI extends BaseActivity {
             /**
              * 下面两句代码能够重新加载地图
              */
-//            fragments.remove(2);
-//            fragments.add(2,new GDMapFragment());
+            fragments.remove(2);
+            fragments.add(2,new GDMapFragment());
             transaction.replace(R.id.main_content_container, fragments.get(index));
             transaction.commit();
         }

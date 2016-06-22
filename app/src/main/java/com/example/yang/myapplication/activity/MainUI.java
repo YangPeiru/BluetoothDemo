@@ -76,7 +76,6 @@ public class MainUI extends BaseActivity {
         fragments.add(new MyStateFragment());
         fragments.add(new NewsListFragment());
         fragments.add(new GDMapFragment());
-//        fragments.add(GDMapFragment.newInstance());
         fragments.add(new SettingFragment());
         //利用RadioGroup脚标索引切换Fragment,默认首页选中
         ((RadioButton) mRgTabs.getChildAt(0)).setChecked(true);
@@ -89,11 +88,6 @@ public class MainUI extends BaseActivity {
             int index = group.indexOfChild(group.findViewById(checkedId));
             //开启事务加载fragment
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            /**
-             * 下面两句代码能够重新加载地图
-             */
-            fragments.remove(2);
-            fragments.add(2,new GDMapFragment());
             transaction.replace(R.id.main_content_container, fragments.get(index));
             transaction.commit();
         }

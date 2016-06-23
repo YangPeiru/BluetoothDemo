@@ -19,14 +19,8 @@ public class GDMapController extends BaseController{
 
     @Override
     protected View initView(Context context) {
-        View view =View.inflate(context, R.layout.controller_find_map,null);
-        x.view().inject(view);
-        //获取地图控件引用
-        return view;
+        return null;
     }
 
-    @Override
-    public void initData() {
 
-    }
 }

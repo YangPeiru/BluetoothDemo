@@ -32,7 +32,7 @@ import java.util.List;
 
 /**
  * Created by ypr on 2016-06-08 11:21
- * 描述:
+ * 描述:引导
  * TODO:
  */
 public class GuideUI extends BaseActivity implements View.OnClickListener {
@@ -96,7 +96,6 @@ public class GuideUI extends BaseActivity implements View.OnClickListener {
             public void onGlobalLayout() {
                 // 当布局完成时的回调
                 mPointSpace = mPointContainer.getChildAt(1).getLeft() - mPointContainer.getChildAt(0).getLeft();
-                Log.d("Log", "mPointSpace : " + mPointSpace);
                 // 移除监听
                 mPointSelected.getViewTreeObserver().removeOnGlobalLayoutListener(this);
             }

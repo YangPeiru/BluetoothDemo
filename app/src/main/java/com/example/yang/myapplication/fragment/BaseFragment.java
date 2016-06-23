@@ -25,7 +25,6 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        //mContext = context;
     }
 
     /**
@@ -51,5 +50,9 @@ public abstract class BaseFragment extends Fragment {
             inflater.inflate(getContentLayoutRes(), childContainer, true);
         }
         return rootView;
+    }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
     }
 }

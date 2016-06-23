@@ -2,6 +2,7 @@ package com.example.yang.myapplication.activity;
 
 import android.Manifest;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -13,6 +14,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.Window;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -40,6 +42,10 @@ public class MainUI extends BaseActivity {
     private ArrayList<Fragment> fragments;
     private RadioGroup mRgTabs;
     private int PERMISSIONS_SUCCESS = 110;
+    private Fragment mMyStateFragment;
+    private Fragment mGDMapFragment;
+    private Fragment mNewsListFragment;
+    private Fragment mSettingFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +55,11 @@ public class MainUI extends BaseActivity {
         //SDK在Android 6.0下需要进行运行检测的权限如下：
         //申请权限
         ActivityCompat.requestPermissions(this, new String[]{
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.READ_PHONE_STATE},
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_PHONE_STATE},
                 PERMISSIONS_SUCCESS);//自定义的code
         initView();
         initData();
@@ -71,12 +77,16 @@ public class MainUI extends BaseActivity {
     }
 
     private void initData() {
-        mRgTabs.setOnCheckedChangeListener(new TabChangedListener());
         fragments = new ArrayList<>();
-        fragments.add(new MyStateFragment());
-        fragments.add(new NewsListFragment());
-        fragments.add(new GDMapFragment());
-        fragments.add(new SettingFragment());
+        mMyStateFragment = new MyStateFragment();
+        mNewsListFragment = new NewsListFragment();
+        mGDMapFragment = new GDMapFragment();
+        mSettingFragment = new SettingFragment();
+        fragments.add(mMyStateFragment);
+        fragments.add(mNewsListFragment);
+        fragments.add(mGDMapFragment);
+        fragments.add(mSettingFragment);
+        mRgTabs.setOnCheckedChangeListener(new TabChangedListener());
         //利用RadioGroup脚标索引切换Fragment,默认首页选中
         ((RadioButton) mRgTabs.getChildAt(0)).setChecked(true);
         startBluetooth();
@@ -88,7 +98,18 @@ public class MainUI extends BaseActivity {
             int index = group.indexOfChild(group.findViewById(checkedId));
             //开启事务加载fragment
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.main_content_container, fragments.get(index));
+            Fragment fragment = fragments.get(index);
+            for (int i = 0; i < fragments.size(); i++) {
+                if (index == i) {
+                    continue;
+                }
+                transaction.hide(fragments.get(i));
+            }
+            if (!fragment.isAdded()) {
+                transaction.add(R.id.main_content_container, fragment).show(fragment);
+            } else {
+                transaction.show(fragment);
+            }
             transaction.commit();
         }
     }

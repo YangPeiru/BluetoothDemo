@@ -9,8 +9,6 @@ import com.example.yang.myapplication.R;
 
 
 /**
- * @项目名: PicAdaptor
- * @包名: com.yangpeiru.picadaptorlibrary
  * @文件名: PicAdaptorLayout
  * @创建者: 杨沛儒
  * @创建时间: 2015/11/27 00:56

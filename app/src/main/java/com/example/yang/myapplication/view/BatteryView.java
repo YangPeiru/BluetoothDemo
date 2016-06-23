@@ -9,6 +9,9 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 
+/**
+ * 自定义电池view
+ */
 public class BatteryView extends View {
 
 	private int mPower = 100;

@@ -34,7 +34,7 @@ import java.util.Date;
 
 /**
  * Created by ypr on 2016-06-17 10:08
- * 描述:
+ * 描述:显示地图的页面
  * TODO:
  */
 public class GDMapFragment extends BaseFragment implements LocationSource, AMapLocationListener {
@@ -132,14 +132,12 @@ public class GDMapFragment extends BaseFragment implements LocationSource, AMapL
      */
     @Override
     public void deactivate() {
-        mListener = null;
-//        aMap.removecache();
-        aMap = null;
         if (mLocationClient != null) {
             mLocationClient.stopLocation();
             mLocationClient.onDestroy();
         }
         mLocationClient = null;
+        Log.d("Log", "停止定位");
     }
 
     /**
@@ -183,6 +181,7 @@ public class GDMapFragment extends BaseFragment implements LocationSource, AMapL
     public void onResume() {
         super.onResume();
         mapView.onResume();
+        activate(mListener);
     }
 
     /**
@@ -192,9 +191,9 @@ public class GDMapFragment extends BaseFragment implements LocationSource, AMapL
     public void onPause() {
         super.onPause();
         mapView.onPause();
-        mLocationClient.stopLocation();
         deactivate();
     }
+
 
     /**
      * 方法必须重写
@@ -207,8 +206,11 @@ public class GDMapFragment extends BaseFragment implements LocationSource, AMapL
 
     @Override
     public void onDestroyView() {
-        super.onDestroyView();
+        mListener = null;
+        aMap = null;
         mapView.onDestroy();
+        Log.d("Log","地图销毁");
+        super.onDestroyView();
     }
 
     /**
@@ -217,6 +219,5 @@ public class GDMapFragment extends BaseFragment implements LocationSource, AMapL
     @Override
     public void onDestroy() {
         super.onDestroy();
-
     }
 }

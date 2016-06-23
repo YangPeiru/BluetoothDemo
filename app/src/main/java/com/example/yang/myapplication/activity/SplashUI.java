@@ -18,7 +18,7 @@ import com.example.yang.myapplication.utils.PreferenceUtils;
 
 /**
  * Created by ypr on 2016-06-08 11:21
- * 描述:
+ * 描述:开场画面
  * TODO:
  */
 public class SplashUI extends BaseActivity {

@@ -35,7 +35,7 @@ import java.util.Map;
 
 /**
  * Created by ypr on 2016-06-08 17:15
- * 描述:
+ * 描述:广场数据显示类
  * TODO:
  */
 public class NewestListController extends BaseController {

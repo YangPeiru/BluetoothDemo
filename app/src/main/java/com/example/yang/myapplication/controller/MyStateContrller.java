@@ -15,6 +15,7 @@ import org.xutils.x;
 
 /**
  * Created by Yang on 2016/6/12.
+ * 描述:状态数据实现类
  */
 public class MyStateContrller extends BaseController{
     private BatteryView mBatteryView;
@@ -44,10 +45,8 @@ public class MyStateContrller extends BaseController{
         Log.d("Log","注册电量广播");
     }
 
-    public void unregister(boolean close) {
-        if (close) {
+    public void unregister() {
             mContext.unregisterReceiver(batteryChangedReceiver);
-        }
     }
 
     // 接受广播
@@ -66,7 +65,5 @@ public class MyStateContrller extends BaseController{
     @Override
     public void onDestroy() {
         super.onDestroy();
-        unregister(true);
-        Log.d("Log","销毁电量显示广播");
     }
 }

@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * Created by ypr on 2016-06-08 16:06
- * 描述:
+ * 描述:显示设置的页面
  * TODO:
  */
 public class SettingFragment extends BaseFragment {
@@ -28,7 +28,7 @@ public class SettingFragment extends BaseFragment {
 
     @Override
     public int getContentLayoutRes() {
-        return R.layout.fragment_setting;
+        return R.layout.fragment_noscroll_viewpager;
     }
 
     @Override
@@ -48,7 +48,7 @@ public class SettingFragment extends BaseFragment {
     }
 
 
-    private class ContentPagerAdapter extends PagerAdapter {
+    private class SettingPagerAdapter extends PagerAdapter {
         @Override
         public int getCount() {
             return mPageDatas != null ? mPageDatas.size() : 0;
@@ -74,7 +74,7 @@ public class SettingFragment extends BaseFragment {
         public void destroyItem(ViewGroup container, int position, Object object) {
             //两个contrller是同一个,因为是同一个position
             BaseController controller = mPageDatas.get(position);
-            controller.onDestroy();//调用子类自己的销毁方式
+//            controller.onDestroy();//调用子类自己的销毁方式
             container.removeView((View) object);
         }
     }

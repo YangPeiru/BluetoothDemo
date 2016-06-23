@@ -4,6 +4,7 @@ import java.nio.charset.Charset;
 
 /**
  * Created by llh on 2015/12/30.
+ * 描述:全局常量类
  */
 public class PConst {
 

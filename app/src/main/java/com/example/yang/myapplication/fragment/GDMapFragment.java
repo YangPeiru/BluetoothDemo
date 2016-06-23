@@ -168,7 +168,7 @@ public class GDMapFragment extends BaseFragment implements LocationSource, AMapL
                 amapLocation.getCityCode();//城市编码
                 amapLocation.getAdCode();//地区编码
                 amapLocation.getAoiName();//获取当前定位点的AOI信息
-                PUtils.showToast(getActivity().getApplicationContext(),amapLocation.getAddress());
+                PUtils.showToast(getActivity().getApplicationContext(), amapLocation.getAddress());
             } else {
                 String errText = "定位失败," + amapLocation.getErrorCode() + ": " + amapLocation.getErrorInfo();
                 PUtils.showToast(getActivity().getApplicationContext(), errText);
@@ -205,12 +205,18 @@ public class GDMapFragment extends BaseFragment implements LocationSource, AMapL
         mapView.onSaveInstanceState(outState);
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mapView.onDestroy();
+    }
+
     /**
      * 方法必须重写
      */
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        mapView.onDestroy();//如果地图也destroy,切换fragment会黑屏一下,可以写个透明view过渡,这里直接注释
+
     }
 }

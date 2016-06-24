@@ -1,16 +1,14 @@
 package com.example.yang.myapplication.fragment;
 
-import android.app.Activity;
 import android.graphics.Color;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 
 import com.amap.api.location.AMapLocation;
@@ -19,32 +17,39 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 
 import com.amap.api.maps.AMap;
+import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
+import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.Marker;
+import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.example.yang.myapplication.R;
-import com.example.yang.myapplication.utils.PUtils;
-
-
+import com.example.yang.myapplication.utils.YUtils;
 import org.xutils.x;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by ypr on 2016-06-17 10:08
  * 描述:显示地图的页面
  * TODO:
  */
-public class GDMapFragment extends BaseFragment implements LocationSource, AMapLocationListener {
+public class GDMapFragment extends BaseFragment implements LocationSource, AMapLocationListener, AMap.OnMarkerClickListener, AMap.OnMapClickListener {
     private MapView mapView;
     private AMap aMap;
     private AMapLocationClient mLocationClient;
     private OnLocationChangedListener mListener;
     private AMapLocationClientOption mLocationOption;
-    private View mapLayout;
 
+    /**
+     * 添加的覆盖物标志
+     */
+    private Marker currentMarker;
+
+    /**
+     * 展示popWindow布局
+     */
+    private RelativeLayout mpop;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +57,7 @@ public class GDMapFragment extends BaseFragment implements LocationSource, AMapL
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mapLayout = inflater.inflate(R.layout.fragment_bdmap, null);
+        View mapLayout= inflater.inflate(R.layout.fragment_bdmap, null);
         x.view().inject(mapLayout);
         mapView = (MapView) mapLayout.findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);
@@ -94,6 +99,10 @@ public class GDMapFragment extends BaseFragment implements LocationSource, AMapL
         //旋转：变成3D显示图,会回归,LOCATION_TYPE_MAP_ROTATE
         //定位:只是定位,不会强行回归,LOCATION_TYPE_LOCATE
         aMap.setMyLocationType(AMap.LOCATION_TYPE_LOCATE);
+        // 设置地图可视缩放大小
+        aMap.moveCamera(CameraUpdateFactory.zoomTo(16));
+        aMap.getUiSettings().setCompassEnabled(true);// 设置指南针
+        aMap.getUiSettings().setScaleControlsEnabled(true);// 设置比例尺
     }
 
     /**
@@ -117,9 +126,10 @@ public class GDMapFragment extends BaseFragment implements LocationSource, AMapL
             //设置是否强制刷新WIFI，默认为强制刷新
 //            mLocationOption.setWifiActiveScan(true);
             //设置是否允许模拟位置,默认为false，不允许模拟位置
-//            mLocationOption.setMockEnable(false);
+            mLocationOption.setMockEnable(true);
             //设置定位间隔,单位毫秒,默认为2000ms
-            mLocationOption.setInterval(8000);
+            mLocationOption.setInterval(10000);
+
             //设置定位参数
             mLocationClient.setLocationOption(mLocationOption);
             // 在单次定位情况下，定位无论成功与否，都无需调用stopLocation()方法移除请求，定位sdk内部会移除
@@ -147,33 +157,64 @@ public class GDMapFragment extends BaseFragment implements LocationSource, AMapL
         if (mListener != null && amapLocation != null) {
             if (amapLocation != null && amapLocation.getErrorCode() == 0) {
                 mListener.onLocationChanged(amapLocation);// 显示系统小蓝点
-                Log.d("Log", "经度:" + amapLocation.getLongitude());
-                Log.d("Log", "纬度:" + amapLocation.getLatitude());
-                amapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表
-                amapLocation.getLatitude();//获取纬度
-                amapLocation.getLongitude();//获取经度
-                amapLocation.getAccuracy();//获取精度信息
-                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date date = new Date(amapLocation.getTime());
-                df.format(date);//定位时间
-                amapLocation.getAddress();//地址，如果option中设置isNeedAddress为false，则没有此结果，网络定位结果中会有地址信息，GPS定位不返回地址信息。
-                amapLocation.getCountry();//国家信息
-                amapLocation.getProvince();//省信息
-                amapLocation.getCity();//城市信息
-                amapLocation.getDistrict();//城区信息
-                amapLocation.getStreet();//街道信息
-                amapLocation.getStreetNum();//街道门牌号信息
-                amapLocation.getCityCode();//城市编码
-                amapLocation.getAdCode();//地区编码
+                LatLng latLng = new LatLng(amapLocation.getLatitude(),amapLocation.getLongitude());//纬度和经度
+                MarkerOptions otMarkerOptions = new MarkerOptions();
+                otMarkerOptions.position(latLng);
+                otMarkerOptions.visible(true);//设置可见
+                otMarkerOptions.title(amapLocation.getCity()).snippet(amapLocation.getAddress());//里面的内容自定义
+                otMarkerOptions.draggable(true);
+                //下面这个是标记上面这个经纬度在地图的位置是
+                 otMarkerOptions.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_mark));
+
+                //下面这个是自定义的标记图标使用方法
+//                otMarkerOptions.icon(ImageNormal(0));
+
+                aMap.addMarker(otMarkerOptions);
+                aMap.setOnMarkerClickListener(this);
+                aMap.setOnMapClickListener(this);
+//                Log.d("Log", "经度:" + amapLocation.getLongitude());
+//                Log.d("Log", "纬度:" + amapLocation.getLatitude());
+//                amapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表
+//                amapLocation.getLatitude();//获取纬度
+//                amapLocation.getLongitude();//获取经度
+//                amapLocation.getAccuracy();//获取精度信息
+//                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//                Date date = new Date(amapLocation.getTime());
+//                df.format(date);//定位时间
+//                amapLocation.getAddress();//地址，如果option中设置isNeedAddress为false，则没有此结果，网络定位结果中会有地址信息，GPS定位不返回地址信息。
+//                amapLocation.getCountry();//国家信息
+//                amapLocation.getProvince();//省信息
+//                amapLocation.getCity();//城市信息
+//                amapLocation.getDistrict();//城区信息
+//                amapLocation.getStreet();//街道信息
+//                amapLocation.getStreetNum();//街道门牌号信息
+//                amapLocation.getCityCode();//城市编码
+//                amapLocation.getAdCode();//地区编码
                 amapLocation.getAoiName();//获取当前定位点的AOI信息
-                PUtils.showToast(getActivity().getApplicationContext(), amapLocation.getAddress());
+                YUtils.showToast(getActivity().getApplicationContext(), amapLocation.getAddress());
             } else {
                 String errText = "定位失败," + amapLocation.getErrorCode() + ": " + amapLocation.getErrorInfo();
-                PUtils.showToast(getActivity().getApplicationContext(), errText);
+                YUtils.showToast(getActivity().getApplicationContext(), errText);
             }
         }
     }
 
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        currentMarker = marker;
+        Toast.makeText(getActivity(), "你点击了的是" + marker.getTitle(), Toast.LENGTH_SHORT).show();
+        return false;
+    }
+
+    /**
+     * 点击地图其他地方时，隐藏InfoWindow,和popWindow弹出框
+     */
+    @Override
+    public void onMapClick(LatLng latLng) {
+        if (currentMarker != null) {
+            currentMarker.hideInfoWindow();//隐藏InfoWindow框
+        }
+    }
     /**
      * 方法必须重写
      */
@@ -220,4 +261,6 @@ public class GDMapFragment extends BaseFragment implements LocationSource, AMapL
     public void onDestroy() {
         super.onDestroy();
     }
+
+
 }

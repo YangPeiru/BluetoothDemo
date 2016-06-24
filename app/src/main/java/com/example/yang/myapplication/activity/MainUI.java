@@ -7,8 +7,10 @@ import android.app.FragmentTransaction;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 
 import android.os.Bundle;
@@ -46,6 +48,8 @@ public class MainUI extends BaseActivity {
     private Fragment mGDMapFragment;
     private Fragment mNewsListFragment;
     private Fragment mSettingFragment;
+    private FragmentTransaction transaction;
+    private MyBroadcastReceiver receiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +80,20 @@ public class MainUI extends BaseActivity {
         //可在此继续其他操作。
     }
 
+    private class MyBroadcastReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+        }
+    }
+
     private void initData() {
+        receiver = new MyBroadcastReceiver();
+        //实例化过滤器并设置要过滤的广播
+        IntentFilter intentFilter = new IntentFilter("mapChange");
+        //注册广播
+        registerReceiver(receiver, intentFilter);
         fragments = new ArrayList<>();
         mMyStateFragment = new MyStateFragment();
         mNewsListFragment = new NewsListFragment();
@@ -97,7 +114,7 @@ public class MainUI extends BaseActivity {
         public void onCheckedChanged(RadioGroup group, int checkedId) {
             int index = group.indexOfChild(group.findViewById(checkedId));
             //开启事务加载fragment
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction = getFragmentManager().beginTransaction();
             Fragment fragment = fragments.get(index);
             for (int i = 0; i < fragments.size(); i++) {
                 if (index == i) {

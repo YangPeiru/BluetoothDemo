@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <com.example.yang.myapplication.view.SwipeRefreshLayout
+    <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/srl_society"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ListView
+        <com.example.yang.myapplication.view.SwipeRecyclerView
             android:id="@+id/lv_society_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:listSelector="#00000000"/>
 
-    </com.example.yang.myapplication.view.SwipeRefreshLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
-</RelativeLayout>
+</LinearLayout>

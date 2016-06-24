@@ -38,9 +38,9 @@ import java.util.regex.Pattern;
  * Created by ypr on 2015/12/30.
  * 描述:工具类
  */
-public class PUtils {
+public class YUtils {
 
-    public PUtils() {
+    public YUtils() {
     }
 
     /**

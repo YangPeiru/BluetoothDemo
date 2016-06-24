@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -23,7 +22,7 @@ import android.widget.RelativeLayout;
 
 import com.example.yang.myapplication.R;
 import com.example.yang.myapplication.utils.Constants;
-import com.example.yang.myapplication.utils.PUtils;
+import com.example.yang.myapplication.utils.YUtils;
 import com.example.yang.myapplication.utils.PreferenceUtils;
 
 import java.util.ArrayList;
@@ -80,9 +79,9 @@ public class GuideUI extends BaseActivity implements View.OnClickListener {
             View point = new View(this);
             point.setBackgroundResource(R.drawable.point_normal);
             // 代码中，出现的宽高数据都是指的是px,dp-->px
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(PUtils.dp2px(this, 10), PUtils.dp2px(this, 10));
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(YUtils.dp2px(this, 10), YUtils.dp2px(this, 10));
             if (i != 0) {
-                params.leftMargin = PUtils.dp2px(this, 10);
+                params.leftMargin = YUtils.dp2px(this, 10);
             }
             mPointContainer.addView(point, params);
         }

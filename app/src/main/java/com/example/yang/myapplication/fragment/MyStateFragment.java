@@ -63,7 +63,7 @@ public class MyStateFragment extends BaseFragment {
 //        getActivity().registerReceiver(batteryChangedReceiver,  new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
     }
 
-        // 接受广播
+    // 接受广播
     private BroadcastReceiver batteryChangedReceiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             if (Intent.ACTION_BATTERY_CHANGED.equals(intent.getAction())) {

@@ -17,13 +17,13 @@ android {
         debugConfig {
             keyAlias "BluetoothDemo"
             keyPassword "920514"
-            storeFile file("D:/Key/BluetoothDemo.store")
+            storeFile file("D:/Key/BluetoothDemo.jks")
             storePassword "123456"
         }
 //        releaseConfig {
 //            keyAlias "BluetoothDemo"
 //            keyPassword "920514"
-//            storeFile file("D:/Key/BluetoothDemo.store")
+//            storeFile file("D:/Key/BluetoothDemo.jks")
 //            storePassword "123456"
 //        }
     }
@@ -51,6 +51,5 @@ dependencies {
     compile 'com.android.support:design:23.4.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'org.xutils:xutils:3.3.36'
-    compile files('libs/AMap_3DMap_V3.3.2_20160525.jar')
     compile files('libs/AMap_Location_V2.4.1_20160414.jar')
 }

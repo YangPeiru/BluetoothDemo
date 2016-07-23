@@ -91,9 +91,9 @@ public class MainUI extends BaseActivity {
     private void initData() {
         receiver = new MyBroadcastReceiver();
         //实例化过滤器并设置要过滤的广播
-        IntentFilter intentFilter = new IntentFilter("mapChange");
+//        IntentFilter intentFilter = new IntentFilter("mapChange");
         //注册广播
-        registerReceiver(receiver, intentFilter);
+//        registerReceiver(receiver, intentFilter);
         fragments = new ArrayList<>();
         mMyStateFragment = new MyStateFragment();
         mNewsListFragment = new NewsListFragment();

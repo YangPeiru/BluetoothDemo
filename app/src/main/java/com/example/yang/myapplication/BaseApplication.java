@@ -43,7 +43,7 @@ public class BaseApplication extends Application {
     }
 
     public static String getProcessName(Context paramContext, int paramInt) {
-        List localList = ((ActivityManager) paramContext.getSystemService("activity")).getRunningAppProcesses();
+        List localList = ((ActivityManager) paramContext.getSystemService(Context.ACTIVITY_SERVICE)).getRunningAppProcesses();
         if (localList == null)
             return null;
         Iterator localIterator = localList.iterator();

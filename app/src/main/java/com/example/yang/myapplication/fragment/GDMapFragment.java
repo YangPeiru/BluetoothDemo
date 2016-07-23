@@ -16,17 +16,19 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 
-import com.amap.api.maps.AMap;
-import com.amap.api.maps.CameraUpdateFactory;
-import com.amap.api.maps.LocationSource;
-import com.amap.api.maps.MapView;
-import com.amap.api.maps.model.BitmapDescriptorFactory;
-import com.amap.api.maps.model.LatLng;
-import com.amap.api.maps.model.Marker;
-import com.amap.api.maps.model.MarkerOptions;
-import com.amap.api.maps.model.MyLocationStyle;
+
+import com.amap.api.maps2d.AMap;
+import com.amap.api.maps2d.CameraUpdateFactory;
+import com.amap.api.maps2d.LocationSource;
+import com.amap.api.maps2d.MapView;
+import com.amap.api.maps2d.model.BitmapDescriptorFactory;
+import com.amap.api.maps2d.model.LatLng;
+import com.amap.api.maps2d.model.Marker;
+import com.amap.api.maps2d.model.MarkerOptions;
+import com.amap.api.maps2d.model.MyLocationStyle;
 import com.example.yang.myapplication.R;
 import com.example.yang.myapplication.utils.YUtils;
+
 import org.xutils.x;
 
 /**
@@ -35,11 +37,13 @@ import org.xutils.x;
  * TODO:
  */
 public class GDMapFragment extends BaseFragment implements LocationSource, AMapLocationListener, AMap.OnMarkerClickListener, AMap.OnMapClickListener {
-    private MapView mapView;
-    private AMap aMap;
-    private AMapLocationClient mLocationClient;
-    private OnLocationChangedListener mListener;
-    private AMapLocationClientOption mLocationOption;
+    //显示地图需要的变量
+    private MapView mapView;//地图控件
+    private AMap aMap;//地图对象
+    //定位需要的声明
+    private AMapLocationClient mLocationClient = null;//定位发起端
+    private AMapLocationClientOption mLocationOption = null;//定位参数
+    private OnLocationChangedListener mListener = null;//定位监听器
 
     /**
      * 添加的覆盖物标志
@@ -50,6 +54,7 @@ public class GDMapFragment extends BaseFragment implements LocationSource, AMapL
      * 展示popWindow布局
      */
     private RelativeLayout mpop;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +62,7 @@ public class GDMapFragment extends BaseFragment implements LocationSource, AMapL
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View mapLayout= inflater.inflate(R.layout.fragment_bdmap, null);
+        View mapLayout = inflater.inflate(R.layout.fragment_bdmap, null);
         x.view().inject(mapLayout);
         mapView = (MapView) mapLayout.findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);
@@ -84,8 +89,11 @@ public class GDMapFragment extends BaseFragment implements LocationSource, AMapL
         // 自定义系统定位小蓝点
         MyLocationStyle myLocationStyle = new MyLocationStyle();
         myLocationStyle.myLocationIcon(BitmapDescriptorFactory.fromResource(R.mipmap.location_marker));// 设置小蓝点的图标
-        myLocationStyle.strokeColor(Color.BLACK);// 设置圆形的边框颜色
-        myLocationStyle.radiusFillColor(Color.argb(100, 0, 0, 180));// 设置圆形的填充颜色
+//		myLocationStyle.strokeColor(Color.BLACK);// 设置圆形的边框颜色
+//		myLocationStyle.radiusFillColor(Color.argb(100, 0, 0, 180));// 设置圆形的填充颜色
+        myLocationStyle.radiusFillColor(android.R.color.transparent);
+        myLocationStyle.strokeColor(android.R.color.transparent);
+
         // myLocationStyle.anchor(int,int)//设置小蓝点的锚点
         myLocationStyle.strokeWidth(1.0f);// 设置圆形的边框粗细
         aMap.setMyLocationStyle(myLocationStyle);
@@ -98,7 +106,7 @@ public class GDMapFragment extends BaseFragment implements LocationSource, AMapL
         //跟随：每次定位都会回归当定位的位置上,LOCATION_TYPE_MAP_FOLLOW
         //旋转：变成3D显示图,会回归,LOCATION_TYPE_MAP_ROTATE
         //定位:只是定位,不会强行回归,LOCATION_TYPE_LOCATE
-        aMap.setMyLocationType(AMap.LOCATION_TYPE_LOCATE);
+//		aMap.setMyLocationType(AMap.LOCATION_TYPE_LOCATE);
         // 设置地图可视缩放大小
         aMap.moveCamera(CameraUpdateFactory.zoomTo(16));
         aMap.getUiSettings().setCompassEnabled(true);// 设置指南针
@@ -155,16 +163,23 @@ public class GDMapFragment extends BaseFragment implements LocationSource, AMapL
      */
     public void onLocationChanged(AMapLocation amapLocation) {
         if (mListener != null && amapLocation != null) {
-            if (amapLocation != null && amapLocation.getErrorCode() == 0) {
+            if (amapLocation.getErrorCode() == 0) {
                 mListener.onLocationChanged(amapLocation);// 显示系统小蓝点
-                LatLng latLng = new LatLng(amapLocation.getLatitude(),amapLocation.getLongitude());//纬度和经度
+                LatLng latLng = new LatLng(amapLocation.getLatitude(), amapLocation.getLongitude());//纬度和经度
+                //定义一个图标
                 MarkerOptions otMarkerOptions = new MarkerOptions();
                 otMarkerOptions.position(latLng);
                 otMarkerOptions.visible(true);//设置可见
-                otMarkerOptions.title(amapLocation.getCity()).snippet(amapLocation.getAddress());//里面的内容自定义
+//				otMarkerOptions.title(amapLocation.getCity()).snippet(amapLocation.getAddress());//里面的内容自定义
+                //标题
+                otMarkerOptions.title(amapLocation.getAoiName());
+                //子标题
+                otMarkerOptions.snippet("这里好火");
                 otMarkerOptions.draggable(true);
-                //下面这个是标记上面这个经纬度在地图的位置是
-                 otMarkerOptions.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_mark));
+                //下面这个是标记上面这个经纬度在地图的位置
+                otMarkerOptions.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_mark));
+                //设置多少帧刷新一次图片资源
+                otMarkerOptions.period(60);
 
                 //下面这个是自定义的标记图标使用方法
 //                otMarkerOptions.icon(ImageNormal(0));
@@ -215,6 +230,7 @@ public class GDMapFragment extends BaseFragment implements LocationSource, AMapL
             currentMarker.hideInfoWindow();//隐藏InfoWindow框
         }
     }
+
     /**
      * 方法必须重写
      */
@@ -235,7 +251,6 @@ public class GDMapFragment extends BaseFragment implements LocationSource, AMapL
         deactivate();
     }
 
-
     /**
      * 方法必须重写
      */
@@ -245,22 +260,15 @@ public class GDMapFragment extends BaseFragment implements LocationSource, AMapL
         mapView.onSaveInstanceState(outState);
     }
 
-    @Override
-    public void onDestroyView() {
-        mListener = null;
-        aMap = null;
-        mapView.onDestroy();
-        Log.d("Log","地图销毁");
-        super.onDestroyView();
-    }
-
     /**
      * 方法必须重写
      */
     @Override
     public void onDestroy() {
         super.onDestroy();
+        mListener = null;
+        aMap = null;
+        mapView.onDestroy();
+        Log.d("Log", "地图销毁");
     }
-
-
 }

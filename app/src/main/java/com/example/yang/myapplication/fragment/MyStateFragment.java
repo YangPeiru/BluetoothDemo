@@ -19,7 +19,6 @@ import com.example.yang.myapplication.R;
 import com.example.yang.myapplication.controller.BaseController;
 import com.example.yang.myapplication.controller.MyStateContrller;
 import com.example.yang.myapplication.view.BatteryView;
-import com.example.yang.myapplication.view.NoScrollViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,11 +34,11 @@ public class MyStateFragment extends BaseFragment {
     private List<BaseController> mPageDatas;                //
     private BatteryView mBatteryView;
     private TextView mBatteryNum;
+    private MyStateContrller mMyStateContrller;
 
     @Override
     public int getContentLayoutRes() {
         return R.layout.fragment_noscroll_viewpager;
-//        return R.layout.controller_mystate;
     }
 
     @Override
@@ -58,7 +57,7 @@ public class MyStateFragment extends BaseFragment {
 
     private void initData() {
         mPageDatas = new ArrayList<>();
-        mPageDatas.add(new MyStateContrller(getActivity().getApplicationContext()));
+        mPageDatas.add(new MyStateContrller(getActivity()));
         mViewPager.setAdapter(new MyStatePagerAdapter());
 //        getActivity().registerReceiver(batteryChangedReceiver,  new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
     }
@@ -89,6 +88,7 @@ public class MyStateFragment extends BaseFragment {
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             BaseController controller = mPageDatas.get(position);
+            mMyStateContrller = (MyStateContrller) controller;
             // 通过控制器提供显示的view
             View rootView = controller.getRootView();
             container.addView(rootView);// 显示的view
@@ -103,4 +103,10 @@ public class MyStateFragment extends BaseFragment {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mMyStateContrller.onDestroy();
+        mMyStateContrller=null;
+    }
 }

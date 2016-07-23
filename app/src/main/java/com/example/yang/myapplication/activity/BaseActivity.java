@@ -1,12 +1,16 @@
 package com.example.yang.myapplication.activity;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.widget.Toast;
+
+import com.example.yang.myapplication.fragment.BaseFragment;
+import com.example.yang.myapplication.fragment.SettingFragment;
 
 
 /**
@@ -15,6 +19,8 @@ import android.widget.Toast;
  * TODO:
  */
 public class BaseActivity extends Activity {
+
+    private BaseFragment fg;
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);

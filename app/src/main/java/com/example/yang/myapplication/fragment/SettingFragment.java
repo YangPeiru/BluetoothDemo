@@ -3,14 +3,17 @@ package com.example.yang.myapplication.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
 import com.example.yang.myapplication.R;
 import com.example.yang.myapplication.controller.BaseController;
 import com.example.yang.myapplication.controller.MyStateContrller;
-import com.example.yang.myapplication.view.NoScrollViewPager;
+import com.example.yang.myapplication.controller.NewestListController;
+import com.example.yang.myapplication.controller.SettingController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,11 +23,8 @@ import java.util.List;
  */
 public class SettingFragment extends BaseFragment {
 
-    private NoScrollViewPager mViewPager;
-    private RadioGroup mRgTabs;
-    private List<BaseController> mPageDatas;                //
-    private int mCurrentTab;                // 记录当前选中的tab
-    private MyStateContrller myStateContrller;
+    private ViewPager mViewPager;
+    private List<BaseController> mPageDatas;
 
     @Override
     public int getContentLayoutRes() {
@@ -34,7 +34,7 @@ public class SettingFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        mViewPager = (ViewPager) view.findViewById(R.id.noscroll_viewpager);
     }
 
     @Override
@@ -44,7 +44,9 @@ public class SettingFragment extends BaseFragment {
     }
 
     private void initData() {
-
+        mPageDatas = new ArrayList<>();
+        mPageDatas.add(new SettingController(getActivity()));
+        mViewPager.setAdapter(new SettingPagerAdapter());
     }
 
 
@@ -72,9 +74,6 @@ public class SettingFragment extends BaseFragment {
 
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
-            //两个contrller是同一个,因为是同一个position
-            BaseController controller = mPageDatas.get(position);
-//            controller.onDestroy();//调用子类自己的销毁方式
             container.removeView((View) object);
         }
     }
